@@ -14,6 +14,10 @@ module.exports = {
         'NavHoverShow': 'NavHoverShow 0.4s',
         'NavHoverHide': 'NavHoverHide 0.4s',
       },
+      fontFamily: {
+        lexend: ['Lexend Deca', 'sans-serif'],
+        nunito: ['Nunito Sans', 'sans-serif'],
+      },
     },
   },
   plugins: [],
