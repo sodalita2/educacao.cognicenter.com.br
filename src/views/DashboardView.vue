@@ -1,5 +1,18 @@
 <script setup>
 
+import { LoadingPinia } from "../stores/LoadingPinia";
+
+
+
+const Loading = LoadingPinia();
+//Loading.isLoading = true;
+// Ja vem true
+
+
+Loading.isLoading = false;
+
+
+
 
 </script>
 
