@@ -21,3 +21,16 @@
     from {left: 0%;}
     to {left: 100%;}
 }
+
+
+/* Dashboard */
+
+/* Right Menu Slide In */
+@keyframes RightMenuShow {
+    from { right: -33%; }
+    to { right: 0; }
+}
+@keyframes RightMenuHide {
+    from { right: 0; }
+    to { right: -33%; }
+}

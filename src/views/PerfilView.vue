@@ -4,8 +4,9 @@ import axios from "axios";
 import { useRouter, useRoute } from "vue-router";
 import { LoadingPinia } from "../stores/LoadingPinia";
 import DashboardHeader from '../components/DashboardHeader.vue';
-import CadastroDivPinia from '../stores/CadastroOpen';
 import SessionPinia from '../stores/ProfileSession';
+import CadastroDivPinia from '../stores/CadastroOpen';
+
 
 
 const router = useRouter();
@@ -16,8 +17,10 @@ const Loading = LoadingPinia();
 // Ja vem true
 
 // PINIAS
-const cadastroDiv = CadastroDivPinia();
 const ProfileSession = SessionPinia();
+const cadastroDiv = CadastroDivPinia();
+
+
 
 const cadastroPrimeiroNome = ref(null);
 const cadastroSobrenome = ref(null);
@@ -117,11 +120,11 @@ setup();
         <!-- Perfis Container -->
         <div class="flex flex-1 flex-row mt-14">
             <!-- Profile Box -->
-            <div v-for="profile in Profiles" class="w-auto h-[120px] flex flex-col bg-[#4EEE90] rounded-lg m-12 font-nunito tracking-tight">
-                <span class="h-1/2 w-auto flex flex-wrap items-center justify-center p-2
-                text-[whitesmoke] font-[700] text-[22px]"> {{ profile.PRIMEIRO_NOME+" "+profile.SOBRENOME }} </span>
+            <div v-for="profile in Profiles" class="w-[200px] h-[120px] flex flex-col bg-[#4EEE90] rounded-lg ml-8 font-nunito tracking-tight">
+                <span class="h-1/2 w-full flex flex-wrap items-center justify-center p-2
+                text-[whitesmoke] font-[700] text-[22px]"> {{ profile.PRIMEIRO_NOME+" "+(profile.SOBRENOME).slice(0,1)+"." }} </span>
                 <span class="h-1/2 w-full flex items-center justify-center">
-                    <span :id="profile.PROFILE_ID" @click="loginProfile" class="h-[40px] w-[130px] flex justify-center items-center bg-[#FF4365] text-white text-[19px] font-[600]
+                    <span :id="profile.PROFILE_ID" @click="loginProfile" class="h-[40px] w-[165px] flex justify-center items-center bg-[#FF4365] text-white text-[19px] font-[600]
                     cursor-pointer"> Entrar </span>
                 </span>
             </div>
