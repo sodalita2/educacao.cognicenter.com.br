@@ -22,10 +22,20 @@ const router = createRouter({
       component: () => import('../views/DashboardView.vue'),
       children: [
         {
-        path: "/dashboard",
-        name: "Dashboard_Home",
-        component: () => import('../views/Dashboard/Home.vue')
-      }
+          path: "/dashboard",
+          name: "Dashboard_Home",
+          component: () => import('../views/Dashboard/Home.vue')
+        },
+        {
+          path: "/dashboard/seqmat",
+          name: "Atividade_Seqmat",
+          component: () => import('../views/Atividades/SEQMAT/SeqMat.vue')
+        },
+        {
+          path: "/dashboard/memoria",
+          name: "Atividade_Memoria",
+          component: () => import('../views/Atividades/MEMORIA/Memoria.vue')
+        },
       ],
     }
   ],

@@ -8,7 +8,7 @@ export const AtividadesPinia = defineStore("AtividadesPinia", () => {
             id:"1",
             nome:"Sequência Matemática",
             folder:"/SEQMAT",
-            cover_file:"/cover.jpg",
+            cover_file:"/cover.png",
             descricao:"Preencha a sequência matemática com o termo faltando.",
             router_path:"/dashboard/seqmat",
         },

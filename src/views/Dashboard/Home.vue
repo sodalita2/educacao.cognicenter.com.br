@@ -11,7 +11,8 @@ const ProfileSession = SessionPinia();
 
 const Atividades = AtividadesPinia();
 
-
+const Loading = LoadingPinia();
+Loading.isLoading = false;
 
 
 
