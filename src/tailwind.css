@@ -27,10 +27,18 @@
 
 /* Right Menu Slide In */
 @keyframes RightMenuShow {
-    from { right: -33%; }
+    from { right: -60%; }
+    to { right: 0; }
+}
+@keyframes RightMenuFullShow {
+    from { right: -100%; }
     to { right: 0; }
 }
 @keyframes RightMenuHide {
     from { right: 0; }
-    to { right: -33%; }
+    to { right: -60%; }
+}
+@keyframes RightMenuFullHide {
+    from { right: 0; }
+    to { right: -100%; }
 }

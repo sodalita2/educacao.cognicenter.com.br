@@ -91,7 +91,7 @@ font-family: 'Monoton',cursive;(not working)
 }
 
 body {
-  
+  height: auto;
   width: 100%;
   color: black;
   background: white;
