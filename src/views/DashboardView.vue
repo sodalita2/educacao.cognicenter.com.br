@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import $ from 'jquery';
 import SessionPinia from '../stores/ProfileSession';
 import { LoadingPinia } from "../stores/LoadingPinia";
+import { DashboardHeaderPinia } from "../stores/DashboardHeaderVisible";
 
 
 // PINIAS
@@ -11,6 +12,8 @@ const Loading = LoadingPinia();
 //Loading.isLoading = true;
 // Ja vem true
 const ProfileSession = SessionPinia();
+
+const DashboardHeader = DashboardHeaderPinia();
 
 
 
@@ -20,9 +23,11 @@ Loading.isLoading = false;
 // REFS
 const greyLayer = ref(null);
 const RightMenu = ref(null);
+const container = ref(null);
 
 // STATES
 const RightMenuOpen = ref(false);
+
 
 
 function RightMenuToggle() {
@@ -32,6 +37,7 @@ function RightMenuToggle() {
 
         $(RightMenu.value).css("animation","RightMenuHide 0.3s");
         $(greyLayer.value).css("display","none");
+        $(container.value).css("overflow","visible");
         setTimeout(() => {
             $(RightMenu.value).css("right","-60%");
             RightMenuOpen.value = false;
@@ -42,6 +48,7 @@ function RightMenuToggle() {
 
         $(RightMenu.value).css("animation","RightMenuShow 0.3s");
         $(greyLayer.value).css("display","flex");
+        $(container.value).css("overflow","hidden");
         setTimeout(() => {
             $(RightMenu.value).css("right","0");
             RightMenuOpen.value = true;
@@ -56,9 +63,9 @@ function RightMenuToggle() {
 
 <template>
 
-    <div class="h-full w-full bg-white relative">
+    <div ref="container" class="h-auto w-full bg-white relative">
         <!-- Grey Out of Focus (quando clica no Menu) -->
-        <div ref="greyLayer" class="absolute h-full w-full bg-black hidden z-20 opacity-40"></div>
+        <div ref="greyLayer" class="absolute h-full w-[100%] left-0 bg-black hidden z-20 opacity-40"></div>
         <!-- Menu Nav Slide from Right -->
         <!-- desktop 33% da tela -->
         <div ref="RightMenu" class="fixed right-[-60%] h-full w-[60%] flex flex-col bg-[whitesmoke] z-30">
@@ -72,7 +79,7 @@ function RightMenuToggle() {
 
 
         <!-- Dashboard Header -->
-        <div class="h-[120px] w-full flex flex-row items-center">
+        <div v-if="DashboardHeader.isVisible" class="h-[120px] w-full flex flex-row items-center">
             <RouterLink to="/dashboard/" @click="Loading.isLoading = true" class="h-auto w-auto">
                 <img src="/dashboard_logo.png" class="w-[200px] h-[70px] ml-6">
             </RouterLink>

@@ -25,7 +25,7 @@ Loading.isLoading = false;
     <div class="h-auto w-full flex flex-row">
         
         <!-- Left Side (Menu com Secoes) -->
-        <div class="h-auto w-[70%] flex flex-col items-center">
+        <div class="h-[1000px] w-[70%] flex flex-col items-center">
             <!-- Barra Atividades -->
             <div class="h-[700px] w-[95%] flex flex-col items-center">
                 <!-- Titulo da Secao -->
