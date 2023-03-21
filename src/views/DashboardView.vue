@@ -66,7 +66,7 @@ function RightMenuToggle() {
 
 <template>
 
-    <div ref="container" class="h-auto w-full bg-white relative">
+    <div ref="container" class="h-[100vh] w-full bg-white relative">
         <!-- Grey Out of Focus (quando clica no Menu) -->
         <div ref="greyLayer" class="absolute h-full w-[100%] left-0 bg-black hidden z-20 opacity-40"></div>
         <!-- Menu Nav Slide from Right -->
@@ -103,7 +103,7 @@ function RightMenuToggle() {
                 Menu
             </div>
         </div>
-        <RouterView/>
+        <RouterView class="w-full flex flex-1"/>
     </div>
 
 </template>

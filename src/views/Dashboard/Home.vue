@@ -49,7 +49,7 @@ setup();
 <template>
 
     <!-- Container do RouterView -->
-    <div class="h-auto w-full flex flex-col xl:flex-row">
+    <div class="h-full w-full flex flex-col xl:flex-row overflow-y-auto">
         
         <!-- Left Side (Menu com Secoes) -->
         <div class="h-auto w-full xl:w-[70%] flex flex-col items-center bg-white">
