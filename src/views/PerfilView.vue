@@ -101,7 +101,7 @@ setup();
 <template>
 
     <!-- Main Container -->
-    <div class="h-auto w-full flex flex-col relative">
+    <div class="h-[100vh] w-full flex flex-col relative">
         <!-- Pagina Cadastro Absolute -->
         <div v-if="cadastroDiv.isOpen" class="w-full h-full absolute flex flex-col bg-white z-30">
             <!-- Barra com botao fechar -->
@@ -126,7 +126,7 @@ setup();
 
         <DashboardHeader/>
         <!-- Perfis Container -->
-        <div class="flex flex-1 flex-row flex-wrap mt-14">
+        <div class="flex flex-1 flex-row flex-wrap mt-8 overflow-y-auto">
             <!-- Profile Box -->
             <div v-for="profile in Profiles" class="w-[200px] h-[120px] flex flex-col bg-[#4EEE90] rounded-lg ml-8 mt-6 font-nunito tracking-tight">
                 <span class="h-1/2 w-full flex flex-wrap items-center justify-center p-2
@@ -137,9 +137,6 @@ setup();
                 </span>
             </div>
         </div>
-
-        <!-- Placeholder -->
-        <div class="w-full h-[60px] flex"></div>
 
     </div>    
 
