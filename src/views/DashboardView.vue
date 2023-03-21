@@ -13,12 +13,15 @@ const Loading = LoadingPinia();
 // Ja vem true
 const ProfileSession = SessionPinia();
 
+
 const DashboardHeader = DashboardHeaderPinia();
+DashboardHeader.isVisible = true;
 
 
 
 
-Loading.isLoading = false;
+
+Loading.isLoading = true;
 
 // REFS
 const greyLayer = ref(null);
@@ -37,9 +40,9 @@ function RightMenuToggle() {
 
         $(RightMenu.value).css("animation","RightMenuHide 0.3s");
         $(greyLayer.value).css("display","none");
-        $(container.value).css("overflow","visible");
+        $("body").css("overflow","visible");
         setTimeout(() => {
-            $(RightMenu.value).css("right","-60%");
+            $(RightMenu.value).css("right","-300px");
             RightMenuOpen.value = false;
         }, 260);
 
@@ -48,7 +51,7 @@ function RightMenuToggle() {
 
         $(RightMenu.value).css("animation","RightMenuShow 0.3s");
         $(greyLayer.value).css("display","flex");
-        $(container.value).css("overflow","hidden");
+        $("body").css("overflow","hidden");
         setTimeout(() => {
             $(RightMenu.value).css("right","0");
             RightMenuOpen.value = true;
@@ -68,10 +71,22 @@ function RightMenuToggle() {
         <div ref="greyLayer" class="absolute h-full w-[100%] left-0 bg-black hidden z-20 opacity-40"></div>
         <!-- Menu Nav Slide from Right -->
         <!-- desktop 33% da tela -->
-        <div ref="RightMenu" class="fixed right-[-60%] h-full w-[60%] flex flex-col bg-[whitesmoke] z-30">
-            <!-- Barra com botao Close -->
+        <div ref="RightMenu" class="fixed right-[-300px] h-full w-[300px] flex flex-col bg-[whitesmoke] z-30">
+            <!-- Barra com Greetings + botao Close -->
             <div class="h-[50px] w-full flex flex-row">
+                <div class="h-full flex flex-1 items-center pl-4 pt-1 mr-6 text-black font-[600] font-lexend text-[#4EEE90] text-[25px]">
+                    Olá, {{ ProfileSession.primeiroNome }}
+                </div>
                 <span @click="RightMenuToggle" class="ml-auto mr-6 h-auto w-auto font-[800] font-lexend text-[35px] text-[#4EEE90] cursor-pointer"> X </span>
+            </div>
+            <!-- Right Menu Nav -->
+            <div class="h-[300px] w-full flex flex-col items-center justify-center bg-[pink]">
+                <RouterLink to="/desempenho" class="mb-5 h-[46px] w-[200px] flex items-center justify-center bg-[#4EEE90] text-[whitesmoke] text-[25px] font-[600] font-lexend"> 
+                    Desempenho
+                </RouterLink>
+                <RouterLink to="/configuracoes" class="h-[46px] w-[200px] flex items-center justify-center bg-[#4EEE90] text-[whitesmoke] text-[25px] font-[600] font-lexend"> 
+                    Perfil
+                </RouterLink>
             </div>
         </div>
         

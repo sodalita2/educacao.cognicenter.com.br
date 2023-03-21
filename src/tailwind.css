@@ -49,7 +49,7 @@
 
 /* Right Menu Slide In */
 @keyframes RightMenuShow {
-    from { right: -60%; }
+    from { right: -300px; }
     to { right: 0; }
 }
 @keyframes RightMenuFullShow {
@@ -58,7 +58,7 @@
 }
 @keyframes RightMenuHide {
     from { right: 0; }
-    to { right: -60%; }
+    to { right: -300px; }
 }
 @keyframes RightMenuFullHide {
     from { right: 0; }

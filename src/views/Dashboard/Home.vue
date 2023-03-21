@@ -1,12 +1,20 @@
 <script setup>
+import { ref } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import SessionPinia from '../../stores/ProfileSession';
 import { AtividadesPinia } from "../../stores/Atividades";
 import { LoadingPinia } from "../../stores/LoadingPinia";
 import AtividadeBox from "../../components/AtividadeBox.vue";
+import { DashboardHeaderPinia } from "../../stores/DashboardHeaderVisible";
+import axios from "axios";
+
+
 
 
 // PINIAS
+const DashboardHeader = DashboardHeaderPinia();
+DashboardHeader.isVisible = true;
+
 const ProfileSession = SessionPinia();
 
 const Atividades = AtividadesPinia();
@@ -15,21 +23,40 @@ const Loading = LoadingPinia();
 Loading.isLoading = false;
 
 
+// REFS
+const TotalAtividadesFeitas = ref([]);
+
+// FUNCTIONS
+function setup() {
+
+    axios.get(`https://api.cognicenter.com.br/Auth.php?educacao=1&target=totalatividades&profile_id=${ProfileSession.profileID}`, {
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then( (response) => {
+
+        console.log(response.data);
 
 
+
+        Loading.isLoading = false;
+    });
+
+}
+
+
+setup();
 </script>
 
 <template>
 
     <!-- Container do RouterView -->
-    <div class="h-auto w-full flex flex-row">
+    <div class="h-auto w-full flex flex-col xl:flex-row">
         
         <!-- Left Side (Menu com Secoes) -->
-        <div class="h-[1000px] w-[70%] flex flex-col items-center">
+        <div class="h-auto w-full xl:w-[70%] flex flex-col items-center bg-black">
             <!-- Barra Atividades -->
             <div class="h-[700px] w-[95%] flex flex-col items-center">
                 <!-- Titulo da Secao -->
-                <span class="p-6 h-[60px] w-full flex flex-row items-center text-[30px] font-[600] text-white bg-[#4EEE90] font-lexend tracking-tight
+                <span class="p-6 h-[60px] w-full flex flex-row items-center text-[30px] font-[600] text-[whitesmoke] bg-[#4EEE90] font-lexend tracking-tight
                 rounded-tl-md rounded-tr-md">
                     Atividades
                 </span>
@@ -43,10 +70,11 @@ Loading.isLoading = false;
         </div>
 
         <!-- Right Side (Menu com estatisticas do perfil) -->
-        <div class="h-auto w-[30%]">
+        <div class="h-auto w-full xl:w-[30%] flex flex-col items-center">
             <!-- Secao Estatisticas -->
-            <div class="h-[700px] w-full bg-[pink]">
-
+            <div class="mt-12 xl:mt-0 h-[700px] w-[95%] flex flex-col items-center bg-[#FFC0CB]">
+                <span class="h-[60px] w-full flex flex-row items-center p-6 font-lexend font-[600] bg-[#FF4365] text-[whitesmoke] text-[30px] tracking-tight
+                rounded-tl-md rounded-tr-md"> Estatísticas </span>
             </div>
         </div>
 

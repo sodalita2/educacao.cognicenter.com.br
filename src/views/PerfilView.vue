@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
+import $ from 'jquery';
 import axios from "axios";
 import { useRouter, useRoute } from "vue-router";
 import { LoadingPinia } from "../stores/LoadingPinia";
@@ -51,7 +52,14 @@ function loginProfile(e) {
 
     Loading.isLoading = true;
 
-    ProfileSession.profileID = e.currentTarget.id;
+    //console.log($(e.currentTarget).attr('profile_id'));
+
+    
+    ProfileSession.profileID = $(e.currentTarget).attr('profile_id');
+    ProfileSession.primeiroNome = $(e.currentTarget).attr('primeiro_nome');
+    ProfileSession.sobrenome = $(e.currentTarget).attr('sobrenome');
+    ProfileSession.idade = $(e.currentTarget).attr('idade');
+
 
     router.push({path: '/dashboard'});
 
@@ -124,7 +132,7 @@ setup();
                 <span class="h-1/2 w-full flex flex-wrap items-center justify-center p-2
                 text-[whitesmoke] font-[700] text-[22px]"> {{ profile.PRIMEIRO_NOME+" "+(profile.SOBRENOME).slice(0,1)+"." }} </span>
                 <span class="h-1/2 w-full flex items-center justify-center">
-                    <span :id="profile.PROFILE_ID" @click="loginProfile" class="h-[40px] w-[165px] flex justify-center items-center bg-[#FF4365] text-white text-[19px] font-[600]
+                    <span v-bind="profile" @click="loginProfile" class="h-[40px] w-[165px] flex justify-center items-center bg-[#FF4365] text-white text-[19px] font-[600]
                     cursor-pointer"> Entrar </span>
                 </span>
             </div>

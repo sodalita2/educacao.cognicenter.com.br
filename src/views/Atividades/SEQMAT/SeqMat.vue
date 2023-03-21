@@ -32,7 +32,7 @@ const questoes = ref([
 
 <template>
     <!-- Game Container -->
-    <div class="h-[100vh] w-full flex bg-[pink]">
+    <div class="h-[100vh] w-full flex bg-white">
 
 
     </div>
