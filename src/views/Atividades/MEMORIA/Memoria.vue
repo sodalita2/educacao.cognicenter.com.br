@@ -221,13 +221,13 @@ function ShowCard(e){
 
 <template>
   
-    <div class="h-full w-full flex flex-col bg-black">
+    <div class="h-[100vh] w-full flex flex-col bg-white">
 
         <!-- Game Stats -->
-        <div class="h-[70px] w-full bg-[#91f58c] flex flex-row justify-center items-center">
+        <div class="h-[70px] w-full bg-[#4EEE90] flex flex-row justify-center items-center">
             <button v-if="ActualState == `Start`" @click="StartGame" class="h-[45px] w-[220px] sm:w-[150px] ml-4 sm:ml-12 bg-[#F9F9F9] font-bold border-2 text-[5vw] sm:text-[23px]">Iniciar Jogo</button>
-            <button v-else-if="ActualState == `Jogando`" @click="StopGame" class="h-[45px] w-[220px] sm:w-[150px] ml-4 sm:ml-12 bg-[#F9F9F9] font-bold border-2 text-[5vw] sm:text-[23px]">Parar Jogo</button>
-            <button v-else-if="ActualState == `Fim`" @click="RestartGame" class="h-[45px] w-[220px] sm:w-[150px] ml-4 sm:ml-12 bg-[#F9F9F9] font-bold border-2 text-[5vw] sm:text-[23px]">Recomeçar</button>
+            <button v-if="ActualState == `Jogando`" @click="StopGame" class="h-[45px] w-[220px] sm:w-[150px] ml-4 sm:ml-12 bg-[#F9F9F9] font-bold border-2 text-[5vw] sm:text-[23px]">Parar Jogo</button>
+            <button v-if="ActualState == `Fim`" @click="RestartGame" class="h-[45px] w-[220px] sm:w-[150px] ml-4 sm:ml-12 bg-[#F9F9F9] font-bold border-2 text-[5vw] sm:text-[23px]">Recomeçar</button>
             <div class="h-[70px] flex flex-row w-[400px] items-center ml-8 sm:ml-12">
                 <!-- Timer Container -->
                 <div class="text-2xl sm:text-3xl">
