@@ -52,7 +52,7 @@ setup();
     <div class="h-auto w-full flex flex-col xl:flex-row">
         
         <!-- Left Side (Menu com Secoes) -->
-        <div class="h-auto w-full xl:w-[70%] flex flex-col items-center bg-black">
+        <div class="h-auto w-full xl:w-[70%] flex flex-col items-center bg-white">
             <!-- Barra Atividades -->
             <div class="h-[700px] w-[95%] flex flex-col items-center">
                 <!-- Titulo da Secao -->
