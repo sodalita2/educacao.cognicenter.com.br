@@ -248,7 +248,7 @@ function ShowCard(e){
             <!--<div v-if="(ActualState == `Fim` || Acertos == 10) ? StopGame() : ``"></div>-->
             <!-- Jogo Container -->
             <!-- Jogando -->
-            <div v-if="ActualState == `Jogando`" class="h-[750px] w-full xl:w-[80%] flex flex-col justify-center items-center">
+            <div v-show="ActualState == `Jogando`" class="h-[750px] w-full xl:w-[80%] flex flex-col justify-center items-center">
                 <div v-for="item in CardsArray" class="h-1/4 w-full flex flex-row justify-center items-center">
                     <div v-for="y in item" class="h-[180px] w-[360px] lg:w-[260px] flex items-center justify-center m-[2px] sm:m-1 lg:m-4 cursor-pointer">
                         <img :id="y" class="h-[95%] w-[95%] rounded-xl" :src="`/MEMORIA/${BichosPath[y]}`">
@@ -256,7 +256,7 @@ function ShowCard(e){
                     </div>
                 </div>
             </div>
-            <div v-else-if="ActualState == `Fim`" class="h-[80%] w-[70%] bg-[#91f58c] flex flex-col">
+            <div v-show="ActualState == `Fim`" class="h-[80%] w-[70%] bg-[#91f58c] flex flex-col">
                 <span class="ml-12 mt-12 text-4xl font-[400]">Resultado Atual: {{LastAcertos}} acertos em {{LastTime}}</span>
                 <span class="ml-12 mt-12 text-4xl font-[400]">Melhor Resultado: {{BestAcertos}} acertos em {{BestTime}}</span>
                 <span v-if="BrokeRecord" class="ml-12 mt-12 text-7xl font-bold"> Novo Recorde!</span>
