@@ -8,8 +8,10 @@ export const SessionPinia = defineStore("SessionPinia", () => {
     const sobrenome = ref('');
     const idade = ref('');
 
+    const isProfileIDset = ref(false);
 
-    return { profileID, primeiroNome, sobrenome, idade };
+
+    return { profileID, primeiroNome, sobrenome, idade, isProfileIDset };
 });
 
 export default SessionPinia;

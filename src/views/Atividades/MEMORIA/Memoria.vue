@@ -2,9 +2,12 @@
 import { RouterLink, RouterView } from "vue-router";
 import { ref } from 'vue';
 import $ from 'jquery';
+import axios from "axios";
 import { LoadingPinia } from "../../../stores/LoadingPinia";
 import LoadingLayer from "../../../components/LoadingLayer.vue";
 import { DashboardHeaderPinia } from "../../../stores/DashboardHeaderVisible";
+import SessionPinia from '../../../stores/ProfileSession';
+
 
 
 // PINIAS
@@ -14,10 +17,11 @@ Loading.isLoading = false;
 const DashboardHeader = DashboardHeaderPinia();
 DashboardHeader.isVisible = false;
 
+const Session = SessionPinia();
+console.log(Session.profileID)
 
 
-
-
+const Atividade_ID = 1;
 
 const TimerObj = ref();
 
@@ -29,15 +33,58 @@ function Reset(){
     Minutes.value = 0;
     Acertos.value = 0;
     LastAcertos.value = 0;
-    BrokeRecord.value = false;
+    //BrokeRecord.value = false;
 }
 
-const BrokeRecord = ref(false);
+//const BrokeRecord = ref(false);
 var BestTime = ref("");
-var BestAcertos = ref(0);
+const LastPlayed = ref("");
+//var BestAcertos = ref(0);
 var LastTime = ref("");
 var LastAcertos = ref(0);
 var ActualState = ref("Start");
+
+
+
+// FUNCTIONS
+
+function RegistraJogatina() {
+
+    LastTime.value = TimerRef.value;
+    LastAcertos.value = Acertos.value;
+
+    let timerSplit = LastTime.value.split(":");
+    let mins = timerSplit[0];
+    let secs = timerSplit[1];
+
+    let timer = (parseInt(mins)*60)+parseInt(secs);
+    console.log(timer)
+
+
+    axios.put(`https://api.cognicenter.com.br/Atividades.php?educacao=1&target=putAtividade`, {          
+    data: {
+        PROFILE_ID: Session.profileID,
+        ATIVIDADE_ID: Atividade_ID,
+        SCORE: timer,
+        IS_SCORE_TIMER: "S",
+    },                      
+    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Methods': 'PUT', 'Access-Control-Allow-Origin': '*' }
+    })
+    
+}
+
+function GetMelhorJogatina() {
+
+    axios.get(`https://api.cognicenter.com.br/Atividades.php?educacao=1&target=getAtividadeLastPlayed&id_atividade=${Atividade_ID}&id_profile=${Session.profileID}`, {
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then( (response) => {
+
+        BestTime.value = response.data["SCORE"];
+        LastPlayed.value = response.data["LAST_PLAYED"];
+
+    });
+
+}
 
 function StartGame(){
     Reset();
@@ -46,62 +93,19 @@ function StartGame(){
 }
 
 function StopGame(){
-    ActualState.value = "Fim";
-    LastTime.value = TimerRef.value;
-    LastAcertos.value = Acertos.value;
-    if (localStorage.getItem("BestTime") == null){
-        console.log("storage null");
-        if (LastAcertos > 0){
-            BestTime.value = LastTime.value;
-            BestAcertos.value = LastAcertos.value;
-            localStorage.setItem("BestTime",LastTime.value);
-            localStorage.setItem("BestAcertos",LastAcertos.value);
-            BrokeRecord.value = true;
-        }
-    }else{
-        console.log("storage not null");
-        let LocalBestTime = localStorage.getItem("BestTime");
-        let LocalBestAcertos = parseInt(localStorage.getItem("BestAcertos"));
-        if (LastAcertos > LocalBestAcertos){
-            BestTime.value = LastTime.value;
-            BestAcertos.value = LastAcertos.value;
-            localStorage.setItem("BestTime",LastTime.value);
-            localStorage.setItem("BestAcertos",LastAcertos.value);
-            BrokeRecord.value = true;
-        }else if (LastAcertos == LocalBestAcertos){
-            let SplitLast = LastTime.value.split(":");
-            let LastMinutos = SplitLast[0];
-            let LastSegundos = SplitLast[1];
 
-            let SplitLocal = LocalBestTime.value.split(":");
-            let LocalMinutos = SplitLocal[0];
-            let LocalSegundos = SplitLocal[1];
-
-            if (parseInt(LastMinutos) < parseInt(LocalMinutos)){
-                BestTime.value = LastTime.value;
-                BestAcertos.value = LastAcertos.value;
-                localStorage.setItem("BestTime",LastTime.value);
-                localStorage.setItem("BestAcertos",LastAcertos.value);
-                BrokeRecord.value = true;
-            }
-            else if (parseInt(LastMinutos) == parseInt(LocalMinutos)){
-                if (parseInt(LastSegundos) < parseInt(LocalSegundos)){
-                    BestTime.value = LastTime.value;
-                    BestAcertos.value = LastAcertos.value;
-                    localStorage.setItem("BestTime",LastTime.value);
-                    localStorage.setItem("BestAcertos",LastAcertos.value);
-                    BrokeRecord.value = true;
-                }else{
-                    BestTime.value = LocalBestTime;
-                    BestAcertos.value = LocalBestAcertos;
-                }
-            }else{
-                BestTime.value = LocalBestTime;
-                BestAcertos.value = LocalBestAcertos;
-            }
-        }
-    }
     clearInterval(TimerObj.value);
+
+    Loading.isLoading = true;
+
+    RegistraJogatina();
+
+    GetMelhorJogatina();
+
+    ActualState.value = "Fim";
+
+    Loading.isLoading = false;
+    
 }
 function RestartGame(){
     Reset();
@@ -226,7 +230,7 @@ function ShowCard(e){
         <!-- Game Stats -->
         <div class="h-[70px] w-full bg-[#4EEE90] flex flex-row justify-center items-center">
             <button v-if="ActualState == `Start`" @click="StartGame" class="h-[45px] w-[220px] sm:w-[150px] ml-4 sm:ml-12 bg-[#F9F9F9] font-bold border-2 text-[5vw] sm:text-[23px]">Iniciar Jogo</button>
-            <button v-if="ActualState == `Jogando`" @click="StopGame" class="h-[45px] w-[220px] sm:w-[150px] ml-4 sm:ml-12 bg-[#F9F9F9] font-bold border-2 text-[5vw] sm:text-[23px]">Parar Jogo</button>
+            <button v-if="ActualState == `Jogando`" class="h-[45px] w-[220px] sm:w-[150px] ml-4 sm:ml-12 bg-[#F9F9F9] font-bold border-2 text-[5vw] sm:text-[23px]">Jogando</button>
             <button v-if="ActualState == `Fim`" @click="RestartGame" class="h-[45px] w-[220px] sm:w-[150px] ml-4 sm:ml-12 bg-[#F9F9F9] font-bold border-2 text-[5vw] sm:text-[23px]">Recomeçar</button>
             <div class="h-[70px] flex flex-row w-[400px] items-center ml-8 sm:ml-12">
                 <!-- Timer Container -->
@@ -256,10 +260,9 @@ function ShowCard(e){
                     </div>
                 </div>
             </div>
-            <div v-show="ActualState == `Fim`" class="h-[80%] w-[70%] bg-[#91f58c] flex flex-col">
-                <span class="ml-12 mt-12 text-4xl font-[400]">Resultado Atual: {{LastAcertos}} acertos em {{LastTime}}</span>
-                <span class="ml-12 mt-12 text-4xl font-[400]">Melhor Resultado: {{BestAcertos}} acertos em {{BestTime}}</span>
-                <span v-if="BrokeRecord" class="ml-12 mt-12 text-7xl font-bold"> Novo Recorde!</span>
+            <div v-if="ActualState == `Fim`" class="h-[80%] w-[70%] bg-[#91f58c] flex flex-col">
+                <span class="ml-12 mt-12 text-4xl font-[400]">Tempo Atual: {{LastTime}}</span>
+                <span class="ml-12 mt-12 text-4xl font-[400]">Melhor Resultado: {{ BestTime }} em {{ LastPlayed }} </span>
             </div>
         </div>
 

@@ -10,31 +10,43 @@ const router = createRouter({
       path: "/",
       name: "Home",
       component: () => import('../views/HomeView.vue'),
+      meta: { RequiresAuth: false },
     },
     {
       path: "/perfil",
       name: "Perfil",
       component: () => import('../views/PerfilView.vue'),
+      meta: { RequiresAuth: false },
+    },
+    {
+      path: "/cadastro",
+      name: "Cadastro",
+      component: () => import('../views/CadastroView.vue'),
+      meta: { RequiresAuth: false },
     },
     {
       path: "/dashboard",
       name: "Dashboard",
       component: () => import('../views/DashboardView.vue'),
+      meta: { RequiresAuth: true },
       children: [
         {
           path: "/dashboard",
           name: "Dashboard_Home",
-          component: () => import('../views/Dashboard/Home.vue')
+          component: () => import('../views/Dashboard/Home.vue'),
+          meta: { RequiresAuth: true }
         },
         {
           path: "/dashboard/seqmat",
           name: "Atividade_Seqmat",
-          component: () => import('../views/Atividades/SEQMAT/SeqMat.vue')
+          component: () => import('../views/Atividades/SEQMAT/SeqMat.vue'),
+          meta: { RequiresAuth: true }
         },
         {
           path: "/dashboard/memoria",
           name: "Atividade_Memoria",
-          component: () => import('../views/Atividades/MEMORIA/Memoria.vue')
+          component: () => import('../views/Atividades/MEMORIA/Memoria.vue'),
+          meta: { RequiresAuth: true }
         },
       ],
     }
@@ -50,7 +62,7 @@ router.beforeEach( (to) => {
 
   const ProfileSession = SessionPinia();
 
-  if ( to.path == '/dashboard' && ProfileSession.profileID == '' ) {
+  if ( to.meta.RequiresAuth && ProfileSession.profileID == '' ) {
     return '/perfil';
   }
 

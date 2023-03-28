@@ -7,11 +7,12 @@ import { LoadingPinia } from "../stores/LoadingPinia";
 
 
 defineProps({
-    nome: String,
-    descricao: String,
-    folder: String,
-    cover_file: String,
-    router_path: String,
+    ID: Number,
+    NOME: String,
+    DESCRICAO: String,
+    FOLDER: String,
+    COVER_FILE: String,
+    ROUTER_PATH: String,
 });
 
 
@@ -23,13 +24,14 @@ const Loading = LoadingPinia();
 <template>
 
     <!-- Atividade Box -->
-    <RouterLink :to="router_path" @click="Loading.isLoading = true" class="h-[250px] w-[300px] flex flex-col m-4 rounded-lg bg-[#FF4365] text-[22px] text-white font-lexend font-[700] tracking-tight">
+    <RouterLink :to="ROUTER_PATH" @click="Loading.isLoading = true" class="h-[250px] w-[300px] flex flex-col m-4 rounded-md
+    bg-[#FF4365] text-[22px] text-white font-lexend font-[700] tracking-tight">
         <!-- Atividade Title -->
         <span class="h-[55px] w-full flex items-center pl-2">
-            {{ nome }}
+            {{ NOME }}
         </span>
-        <span class="h-[195px] w-full bg-[whitesmoke] rounded-b-lg">
-            <img :src="folder+cover_file" class="h-full w-full rounded-b-lg">
+        <span class="h-[195px] w-full bg-[whitesmoke] rounded-b-md">
+            <img :src="FOLDER+COVER_FILE" class="h-full w-full rounded-b-md">
         </span>
     </RouterLink>
 

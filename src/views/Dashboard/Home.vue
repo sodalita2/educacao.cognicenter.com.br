@@ -2,7 +2,6 @@
 import { ref } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import SessionPinia from '../../stores/ProfileSession';
-import { AtividadesPinia } from "../../stores/Atividades";
 import { LoadingPinia } from "../../stores/LoadingPinia";
 import AtividadeBox from "../../components/AtividadeBox.vue";
 import { DashboardHeaderPinia } from "../../stores/DashboardHeaderVisible";
@@ -17,7 +16,6 @@ DashboardHeader.isVisible = true;
 
 const ProfileSession = SessionPinia();
 
-const Atividades = AtividadesPinia();
 
 const Loading = LoadingPinia();
 
@@ -25,25 +23,42 @@ const Loading = LoadingPinia();
 
 // REFS
 const TotalAtividadesFeitas = ref([]);
+const Atividades = ref([]);
 
 // FUNCTIONS
 function setup() {
+
+    axios.get(`https://api.cognicenter.com.br/Auth.php?educacao=1&target=getatividades`, {
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then( (response) => {
+
+        response.data.forEach(atividade => {
+            
+            Atividades.value.push(atividade);
+
+        });
+        
+
+    });
 
     axios.get(`https://api.cognicenter.com.br/Auth.php?educacao=1&target=totalatividades&profile_id=${ProfileSession.profileID}`, {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     }).then( (response) => {
 
-        console.log(response.data);
+        //console.log(response.data);
 
 
 
         Loading.isLoading = false;
     });
 
+
 }
 
 
 setup();
+console.log(Atividades.value);
+console.log(ProfileSession.profileID)
 </script>
 
 <template>
@@ -62,7 +77,7 @@ setup();
                 </span>
                 <!-- Conteudo da Secao -->
                 <div class="w-full flex flex-1 border-[1px] border-[rgba(0,0,0,0.1)] border-t-0">
-                    <AtividadeBox v-for="atividade in Atividades.getAtividades" v-bind="atividade">
+                    <AtividadeBox v-for="atividade in Atividades" v-bind="atividade">
                         
                     </AtividadeBox>
                 </div>
