@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   content: [
     "./index.html",
@@ -6,6 +8,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        '2xsm': '400px',
+        'xsm': '500px',
+        ...defaultTheme.screens,
+      },
       colors: {
         "orange-rgba": 'rgba(255, 219, 174, 0.41)',
         "orange-rgba-lighter": 'rgba(255, 219, 174, 0.10)',

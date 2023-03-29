@@ -82,6 +82,10 @@ function GetMelhorJogatina() {
         BestTime.value = response.data["SCORE"];
         LastPlayed.value = response.data["LAST_PLAYED"];
 
+        ActualState.value = "Fim";
+
+        Loading.isLoading = false;
+
     });
 
 }
@@ -102,15 +106,18 @@ function StopGame(){
 
     GetMelhorJogatina();
 
-    ActualState.value = "Fim";
-
-    Loading.isLoading = false;
+    // Muda a tela e para o loading no .then do GetMelhorJogatina()
+    // Melhorar esse codigo
     
 }
 function RestartGame(){
     Reset();
     ActualState.value = "Jogando";
     TimerObj.value = Timer();
+
+    CardsCoverArray.value.forEach( (cover) => {
+        cover.css("display","block");
+    });
 }
 
 
@@ -186,9 +193,15 @@ function Timer(){
 }
 
 
+const CardsCoverArray = ref([]);
+
+function RegisterCover(e) {
+    CardsCoverArray.value.push($(e.currentTarget));
+}
 
 
-//console.log(CardsArray);
+
+
 
 var Acertos = ref(0);
 var ClickedOnce = false;
@@ -229,18 +242,21 @@ function ShowCard(e){
 
         <!-- Game Stats -->
         <div class="h-[70px] w-full bg-[#4EEE90] flex flex-row justify-center items-center">
-            <button v-if="ActualState == `Start`" @click="StartGame" class="h-[45px] w-[220px] sm:w-[150px] ml-4 sm:ml-12 bg-[#F9F9F9] font-bold border-2 text-[5vw] sm:text-[23px]">Iniciar Jogo</button>
-            <button v-if="ActualState == `Jogando`" class="h-[45px] w-[220px] sm:w-[150px] ml-4 sm:ml-12 bg-[#F9F9F9] font-bold border-2 text-[5vw] sm:text-[23px]">Jogando</button>
-            <button v-if="ActualState == `Fim`" @click="RestartGame" class="h-[45px] w-[220px] sm:w-[150px] ml-4 sm:ml-12 bg-[#F9F9F9] font-bold border-2 text-[5vw] sm:text-[23px]">Recomeçar</button>
-            <div class="h-[70px] flex flex-row w-[400px] items-center ml-8 sm:ml-12">
+            <button v-if="ActualState == `Start`" @click="StartGame" class="h-[45px] w-[150px] ml-4 sm:ml-12 bg-[#FF4365] text-[whitesmoke] font-lexend
+            font-[600] text-[19px] 2xsm:text-[22px] xsm:text-[25px] sm:text-[23px]">Iniciar</button>
+            <button v-if="ActualState == `Jogando`" class="h-[45px] w-[150px] ml-4 sm:ml-12 bg-[#FF4365] text-[whitesmoke] font-lexend font-[600px]
+            text-[19px] 2xsm:text-[22px] xsm:text-[25px] sm:text-[23px]">Jogando</button>
+            <button v-if="ActualState == `Fim`" @click="RestartGame" class="h-[45px] w-[150px] ml-4 sm:ml-12 bg-[#FF4365] text-[whitesmoke] font-lexend font-[600]
+            text-[19px] 2xsm:text-[22px] xsm:text-[25px] sm:text-[23px] sm:text-[23px]">Recomeçar</button>
+            <div class="h-[70px] flex flex-row w-[370px] sm:w-[440px] justify-evenly items-center ml-8 sm:ml-12">
                 <!-- Timer Container -->
-                <div class="text-2xl sm:text-3xl">
+                <div class="text-[22px] sm:text-[28px] font-lexend font-[400]">
                     <span v-if="ActualState == `Start`">00:00</span>
                     <span v-else-if="ActualState == `Jogando`">{{TimerRef}}</span>
                     <span v-else-if="ActualState == `Fim`">{{LastTime}}</span>
                 </div>
                 <!-- Score Container -->
-                <div class="text-xl sm:text-2xl ml-8 sm:ml-24">
+                <div class="text-[22px] sm:text-[28px] ml-8 font-lexend font-[400]">
                     <span v-if="ActualState == `Start`">Acertos: 0 de 10</span>
                     <span v-else-if="ActualState == `Jogando`">Acertos: {{Acertos}} de 10</span>
                     <span v-else-if="ActualState == `Fim`">Acertos: {{LastAcertos}} de 10</span>
@@ -256,13 +272,13 @@ function ShowCard(e){
                 <div v-for="item in CardsArray" class="h-1/4 w-full flex flex-row justify-center items-center">
                     <div v-for="y in item" class="h-[180px] w-[360px] lg:w-[260px] flex items-center justify-center m-[2px] sm:m-1 lg:m-4 cursor-pointer">
                         <img :id="y" class="h-[95%] w-[95%] rounded-xl" :src="`/MEMORIA/${BichosPath[y]}`">
-                        <img @click="ShowCard" class="h-full w-full absolute top-0 left-0" src="/MEMORIA/CartaBack.png">
+                        <img @click="ShowCard" @load="RegisterCover" class="h-full w-full absolute top-0 left-0" src="/MEMORIA/CartaBack.png">
                     </div>
                 </div>
             </div>
-            <div v-if="ActualState == `Fim`" class="h-[80%] w-[70%] bg-[#91f58c] flex flex-col">
-                <span class="ml-12 mt-12 text-4xl font-[400]">Tempo Atual: {{LastTime}}</span>
-                <span class="ml-12 mt-12 text-4xl font-[400]">Melhor Resultado: {{ BestTime }} em {{ LastPlayed }} </span>
+            <div v-if="ActualState == `Fim`" class="h-[92%] w-[90%] bg-[#91f58c] flex flex-col p-4 xsm:p-12">
+                <span class="text-[23px] xsm:text-[30px] font-lexend font-[500]">Tempo Atual: {{LastTime}}</span>
+                <span class="mt-12 text-[23px] xsm:text-[30px] font-lexend font-[500]">Melhor Resultado: {{ BestTime }} em {{ LastPlayed }} </span>
             </div>
         </div>
 
