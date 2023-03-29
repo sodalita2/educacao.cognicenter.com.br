@@ -24,6 +24,7 @@ const Loading = LoadingPinia();
 // REFS
 const TotalAtividadesFeitas = ref([]);
 const Atividades = ref([]);
+const LastPlayedAtividade = ref({});
 
 // FUNCTIONS
 function setup() {
@@ -41,17 +42,25 @@ function setup() {
 
     });
 
-    axios.get(`https://api.cognicenter.com.br/Auth.php?educacao=1&target=totalatividades&profile_id=${ProfileSession.profileID}`, {
+    axios.get(`https://api.cognicenter.com.br/Auth.php?educacao=1&target=totalatividadesfeitas&profile_id=${ProfileSession.profileID}`, {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     }).then( (response) => {
 
         //console.log(response.data);
 
+    });
 
+    
+    axios.get(`https://api.cognicenter.com.br/Atividades.php?educacao=1&target=getLastPlayed&id_profile=${ProfileSession.profileID}`, {
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    }).then( (response) => {
+
+        console.log(response.data);
+
+        LastPlayedAtividade.value = response.data;
 
         Loading.isLoading = false;
     });
-
 
 }
 
@@ -88,8 +97,17 @@ console.log(ProfileSession.profileID)
         <div class="h-auto w-full xl:w-[30%] flex flex-col items-center">
             <!-- Secao Estatisticas -->
             <div class="mt-12 xl:mt-0 h-[700px] w-[95%] flex flex-col items-center bg-[#FFC0CB]">
+                <!-- Title -->
                 <span class="h-[60px] w-full flex flex-row items-center p-6 font-lexend font-[600] bg-[#FF4365] text-[whitesmoke] text-[30px] tracking-tight
                 rounded-tl-md rounded-tr-md"> Estatísticas </span>
+                <!-- Barra Last Played Atividade -->
+                <div class="h-auto w-full flex flex-col text-black font-lexend">
+                    <span class="h-[50px] w-full p-2">
+                        Última Atividade: {{ LastPlayedAtividade.ATIVIDADE }}
+                    </span>
+                    <span class="flex flex-row h-[50px] w-full p-2"> {{ LastPlayedAtividade.LAST_PLAYED }} , Score: {{ LastPlayedAtividade.SCORE }} </span>
+                   
+                </div>
             </div>
         </div>
 
