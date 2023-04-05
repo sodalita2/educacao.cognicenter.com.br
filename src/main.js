@@ -7,6 +7,8 @@ import router from "./router";
 import "./assets/main.css";
 import "../src/tailwind.css";
 
+
+
 const app = createApp(App);
 
 app.use(createPinia());
