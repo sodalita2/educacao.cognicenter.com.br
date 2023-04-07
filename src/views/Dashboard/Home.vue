@@ -62,8 +62,8 @@ function setup() {
 
 function loadEstatisticas() {
     
-    axios.get(`https://api.cognicenter.com.br/Atividades.php?educacao=1&target=getLastPlayed&id_profile=${ProfileSession.profileID}`, {
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-API-KEY': 'guaraviton' },
+    axios.get(`http://localhost:3000/api/LastPlayed/${ProfileSession.profileID}`, {
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
     }).then( (response) => {
 
        
@@ -78,7 +78,8 @@ function loadEstatisticas() {
 setup();
 loadEstatisticas();
 console.log(Atividades.value);
-console.log(ProfileSession.profileID)
+console.log(ProfileSession.profileID);
+console.log(import.meta.env.VITE_API_KEY);
 </script>
 
 <template>
