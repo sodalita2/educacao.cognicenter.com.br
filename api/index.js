@@ -8,7 +8,7 @@ const axios = require('axios');
 
 const app = express();
 app.use(cors({ origin: ['http://localhost:5173','http://localhost:3000','https://educacao.cognicenter.com.br/'], credentials: true }));
-const port = 3000;
+const port = process.env.VITE_PORT || 3000;
 
 
 /*
