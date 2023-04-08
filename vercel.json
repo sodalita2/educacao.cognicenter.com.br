@@ -1,4 +1,8 @@
 {   
+    "rewrites": [
+        { "source": "/(.*)", "destination": "/" },
+        { "source": "/api/(.*)", "destination": "/api" }
+    ],
     "version": 2,
     "builds": [
         {
@@ -11,9 +15,5 @@
             "src": "/(.*)",
             "dest": "/"
         }
-    ],
-    "rewrites": [
-        { "source": "/(.*)", "destination": "/" },
-        { "source": "/api/(.*)", "destination": "/api" }
     ]
 }
