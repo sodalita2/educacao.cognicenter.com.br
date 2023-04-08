@@ -7,7 +7,7 @@ const axios = require('axios');
 
 
 const app = express();
-app.use(cors({ origin: ['http://localhost:5173','http://localhost:3000','https://educacao.cognicenter.com.br/'], credentials: true }));
+app.use(cors({ origin: ['http://localhost:5173','http://localhost:3000','https://educacao.cognicenter.com.br'], credentials: true }));
 const port = process.env.VITE_PORT || 3000;
 
 
@@ -27,7 +27,7 @@ app.get('/api/LastPlayed/:id_profile', cors(), (req, res) => {
 
     const options = {
         method: "GET",
-        url: `https://api.cognicenter.com.br/Atividades.php?educacao=1&target=getLastPlayed&id_profile=${req.params.id_profile}`,
+        url: `https://api.cognicenter.com.br/Atividades.php?educacao=1&target=getLastPlayed&id_profile=${req.params.id_profile}`
     }
     
     axios
