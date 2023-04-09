@@ -62,7 +62,7 @@ function setup() {
 
 function loadEstatisticas() {
     
-    axios.get(`http://localhost:3000/api/LastPlayed/${ProfileSession.profileID}`, {
+    axios.get(`https://api.cognicenter.com.br/Atividades.php?educacao=1&target=getAtividadeLastPlayed&id_atividade=1&id_profile=${ProfileSession.profileID}`, {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     }).then( (response) => {
 
