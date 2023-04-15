@@ -25,6 +25,36 @@ const yellow = ref(null);
 const green = ref(null);
 
 
+const Atividade_ID = 4;
+
+// FUNCTIONS
+
+function RegistraJogatina() {
+
+    Loading.isLoading = true;
+
+    axios.put(`https://api.cognicenter.com.br/Atividades.php?educacao=1&target=putAtividade`, {          
+    data: {
+        PROFILE_ID: Session.profileID,
+        ATIVIDADE_ID: Atividade_ID,
+        SCORE: GameScore.value,
+        IS_SCORE_TIMER: "N",
+    },                      
+    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Methods': 'PUT', 'Access-Control-Allow-Origin': '*' }
+    }).then( (response) => {
+        Loading.isLoading = false;
+    })
+
+}
+
+function ResetGame() {
+
+    ActualState.value = "Start";
+    ColorsClicked.value = 0;
+    Sequencia.value = [];
+
+}
+
 
 const GameScore = ref(0);
 
@@ -50,6 +80,7 @@ async function countBtn(e) {
         if ( Sequencia.value[ColorsClicked.value-1] !== $(e.currentTarget).attr('id') ) {
             console.log("errou");
             ActualState.value = 'Fim';
+            RegistraJogatina();
         }
 
         if ( ColorsClicked.value == Sequencia.value.length ) {
@@ -141,7 +172,7 @@ async function StartGame() {
             font-[600] text-[19px] 2xsm:text-[22px] xsm:text-[25px] sm:text-[23px]">Iniciar</button>
             <button v-if="ActualState == `Jogando`" class="h-[45px] w-[150px] ml-4 sm:ml-12 bg-[#FF4365] text-[whitesmoke] font-lexend font-[600]
             text-[19px] 2xsm:text-[22px] xsm:text-[25px] sm:text-[23px]">Jogando</button>
-            <button v-if="ActualState == `Fim`" class="h-[45px] w-[150px] ml-4 sm:ml-12 bg-[#FF4365] text-[whitesmoke] font-lexend font-[600]
+            <button v-if="ActualState == `Fim`" @click="ResetGame" class="h-[45px] w-[150px] ml-4 sm:ml-12 bg-[#FF4365] text-[whitesmoke] font-lexend font-[600]
             text-[19px] 2xsm:text-[22px] xsm:text-[25px] sm:text-[23px]">Reset</button>
             <span class="h-full w-auto flex justify-center items-center font-lexend font-[500] ml-4"> Score: {{ GameScore }} </span>
         </div>
