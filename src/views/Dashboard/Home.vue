@@ -62,6 +62,7 @@ function setup() {
 
 function loadEstatisticas() {
     
+    /*
     axios.get(`https://api.cognicenter.com.br/Atividades.php?educacao=1&target=getAtividadeLastPlayed&id_atividade=1&id_profile=${ProfileSession.profileID}`, {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     }).then( (response) => {
@@ -72,7 +73,18 @@ function loadEstatisticas() {
         EstatiscasLoaded.value = true;
 
     });
-    
+    */
+    axios.get(`https://api.cognicenter.com.br/Atividades.php?educacao=1&target=getLastPlayedAtividade&id_profile=${ProfileSession.profileID}`, {
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    }).then( (response) => {
+
+       
+        LastPlayedAtividade.value = response.data;
+
+        EstatiscasLoaded.value = true;
+
+    });
+
 }
 
 setup();
