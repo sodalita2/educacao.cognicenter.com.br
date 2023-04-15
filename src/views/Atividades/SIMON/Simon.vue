@@ -2,6 +2,7 @@
 import { RouterLink, RouterView } from "vue-router";
 import { ref, resolveComponent } from 'vue';
 import $ from 'jquery';
+import axios from 'axios';
 import SessionPinia from '../../../stores/ProfileSession';
 import { LoadingPinia } from "../../../stores/LoadingPinia";
 import { DashboardHeaderPinia } from "../../../stores/DashboardHeaderVisible";
