@@ -120,6 +120,14 @@ console.log(import.meta.env.VITE_API_KEY);
                     <span class="flex flex-row h-[50px] w-full p-2"> {{ LastPlayedAtividade.LAST_PLAYED }} , Score: {{ LastPlayedAtividade.SCORE }} </span>
                    
                 </div>
+                <!-- Barra Atividade Mais Realizada -->
+                <div class="h-auto w-full flex flex-col text-black font-lexend">
+                    <span class="h-[50px] w-full p-2">
+                        Atividade mais realizada: {{ LastPlayedAtividade.ATIVIDADE }}
+                    </span>
+                    <span class="flex flex-row h-[50px] w-full p-2"> {{ LastPlayedAtividade.LAST_PLAYED }} , Score: {{ LastPlayedAtividade.SCORE }} </span>
+                   
+                </div>
             </div>
             <!-- Estatisticas Loading -->
             <div v-show="!EstatiscasLoaded" class="mt-12 xl:mt-0 h-[700px] w-[95%] flex flex-col items-center justify-center bg-[#FFC0CB]">

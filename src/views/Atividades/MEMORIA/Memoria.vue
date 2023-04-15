@@ -244,7 +244,7 @@ function ShowCard(e){
         <div class="h-[70px] w-full bg-[#4EEE90] flex flex-row justify-center items-center">
             <button v-if="ActualState == `Start`" @click="StartGame" class="h-[45px] w-[150px] ml-4 sm:ml-12 bg-[#FF4365] text-[whitesmoke] font-lexend
             font-[600] text-[19px] 2xsm:text-[22px] xsm:text-[25px] sm:text-[23px]">Iniciar</button>
-            <button v-if="ActualState == `Jogando`" class="h-[45px] w-[150px] ml-4 sm:ml-12 bg-[#FF4365] text-[whitesmoke] font-lexend font-[600px]
+            <button v-if="ActualState == `Jogando`" class="h-[45px] w-[150px] ml-4 sm:ml-12 bg-[#FF4365] text-[whitesmoke] font-lexend font-[600]
             text-[19px] 2xsm:text-[22px] xsm:text-[25px] sm:text-[23px]">Jogando</button>
             <button v-if="ActualState == `Fim`" @click="RestartGame" class="h-[45px] w-[150px] ml-4 sm:ml-12 bg-[#FF4365] text-[whitesmoke] font-lexend font-[600]
             text-[19px] 2xsm:text-[22px] xsm:text-[25px] sm:text-[23px] sm:text-[23px]">Recomeçar</button>

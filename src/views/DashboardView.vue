@@ -95,7 +95,7 @@ function RightMenuToggle() {
 
         <!-- Dashboard Header -->
         <div v-if="DashboardHeader.isVisible" class="h-[120px] w-full flex flex-row items-center">
-            <RouterLink to="/dashboard" @click="Loading.isLoading = true" class="h-auto w-auto">
+            <RouterLink to="/perfil" @click="Loading.isLoading = true" class="h-auto w-auto">
                 <img src="/dashboard_logo.png" class="w-[200px] h-[70px] ml-6">
             </RouterLink>
             <div @click="RightMenuToggle" class="ml-auto mr-6 h-[55px] w-[150px] flex justify-center items-center bg-[#4EEE90] text-[#FFFFFF] text-[24px] font-[700] font-lexend tracking-tight

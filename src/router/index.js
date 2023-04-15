@@ -48,6 +48,18 @@ const router = createRouter({
           component: () => import('../views/Atividades/MEMORIA/Memoria.vue'),
           meta: { RequiresAuth: true }
         },
+        {
+          path: "/dashboard/corrida",
+          name: "Atividade_Corrida",
+          component: () => import('../views/Atividades/CORRIDA/Corrida.vue'),
+          meta: { RequiresAuth: true }
+        },
+        {
+          path: "/dashboard/simon",
+          name: "Atividade_Simon",
+          component: () => import('../views/Atividades/SIMON/Simon.vue'),
+          meta: { RequiresAuth: true }
+        }
       ],
     }
   ],
