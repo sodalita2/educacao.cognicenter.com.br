@@ -36,7 +36,7 @@ function RegistraJogatina() {
 
     axios.put(`https://api.cognicenter.com.br/Atividades.php?educacao=1&target=putAtividade`, {          
     data: {
-        PROFILE_ID: Session.profileID,
+        PROFILE_ID: ProfileSession.profileID,
         ATIVIDADE_ID: Atividade_ID,
         SCORE: GameScore.value,
         IS_SCORE_TIMER: "N",
