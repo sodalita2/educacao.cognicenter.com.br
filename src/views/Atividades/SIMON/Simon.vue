@@ -52,6 +52,7 @@ function ResetGame() {
 
     ActualState.value = "Start";
     ColorsClicked.value = 0;
+    GameScore.value = 0;
     Sequencia.value = [];
 
 }
