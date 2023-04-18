@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { RouterLink, RouterView } from "vue-router";
 import SessionPinia from '../../stores/ProfileSession';
 import { LoadingPinia } from "../../stores/LoadingPinia";
@@ -28,6 +28,7 @@ const Loading = LoadingPinia();
 const TotalAtividadesFeitas = ref([]);
 const Atividades = ref([]);
 const LastPlayedAtividade = ref({});
+const MostPlayedAtividade = ref({});
 
 // STATE REFS
 const EstatiscasLoaded = ref(false);
@@ -60,8 +61,17 @@ function setup() {
 
 }
 
+
 function loadEstatisticas() {
+
+    const calls = ref(0);
     
+    watch( (calls), (y) => {
+        if ( y == 2 ) {
+            EstatiscasLoaded.value = true;
+        }
+    });
+
     /*
     axios.get(`https://api.cognicenter.com.br/Atividades.php?educacao=1&target=getAtividadeLastPlayed&id_atividade=1&id_profile=${ProfileSession.profileID}`, {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -78,12 +88,22 @@ function loadEstatisticas() {
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     }).then( (response) => {
 
-       
+        calls.value++;
+
         LastPlayedAtividade.value = response.data;
 
-        EstatiscasLoaded.value = true;
+    });
+
+    axios.get(`https://api.cognicenter.com.br/Atividades.php?educacao=1&target=getMostPlayedAtividade&id_atividade=1&id_profile=1`, {
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },        
+    }).then(  (response) => {
+
+        calls.value++;
+
+        MostPlayedAtividade.value = response.data;
 
     });
+
 
 }
 
@@ -109,7 +129,7 @@ console.log(import.meta.env.VITE_API_KEY);
                     Atividades
                 </span>
                 <!-- Conteudo da Secao -->
-                <div class="w-full flex flex-1 border-[1px] border-[rgba(0,0,0,0.1)] border-t-0">
+                <div class="w-full flex flex-1 flex-wrap border-[1px] border-[rgba(0,0,0,0.1)] border-t-0">
                     <AtividadeBox v-for="atividade in Atividades" v-bind="atividade">
                         
                     </AtividadeBox>
@@ -125,19 +145,21 @@ console.log(import.meta.env.VITE_API_KEY);
                 <span class="h-[60px] w-full flex flex-row items-center p-6 font-lexend font-[600] bg-[#FF4365] text-[whitesmoke] text-[30px] tracking-tight
                 rounded-tl-md rounded-tr-md"> Estatísticas </span>
                 <!-- Barra Last Played Atividade -->
-                <div class="h-auto w-full flex flex-col text-black font-lexend">
-                    <span class="h-[50px] w-full p-2">
+                <div class="h-auto w-full flex flex-col text-black font-lexend mt-2">
+                    <span class="h-[50px] w-full p-2 text-[rgba(0,0,0,0.75)] font-[600]">
                         Última Atividade: {{ LastPlayedAtividade.ATIVIDADE }}
                     </span>
-                    <span class="flex flex-row h-[50px] w-full p-2"> {{ LastPlayedAtividade.LAST_PLAYED }} , Score: {{ LastPlayedAtividade.SCORE }} </span>
+                    <span class="flex flex-row h-[50px] w-full p-2 text-[rgba(0,0,0,0.75)] font-[600]"> {{ LastPlayedAtividade.LAST_PLAYED }} , Score: {{ LastPlayedAtividade.SCORE }} </span>
                    
                 </div>
+                <!-- Divisoria -->
+                <div class="h-[2px] w-[95%] bg-[rgba(0,0,0,0.35)]"></div>
                 <!-- Barra Atividade Mais Realizada -->
                 <div class="h-auto w-full flex flex-col text-black font-lexend">
-                    <span class="h-[50px] w-full p-2">
-                        Atividade mais realizada: {{ LastPlayedAtividade.ATIVIDADE }}
+                    <span class="h-[50px] w-full p-2 text-[rgba(0,0,0,0.75)] font-[600]">
+                        Atividade mais realizada: {{ MostPlayedAtividade.ATIVIDADE }}
                     </span>
-                    <span class="flex flex-row h-[50px] w-full p-2"> {{ LastPlayedAtividade.LAST_PLAYED }} , Score: {{ LastPlayedAtividade.SCORE }} </span>
+                    <span class="flex flex-row h-[50px] w-full p-2 text-[rgba(0,0,0,0.75)] font-[600]"> {{ MostPlayedAtividade.QTD }} vezes </span>
                    
                 </div>
             </div>

@@ -7,6 +7,13 @@ import { LoadingPinia } from "../../../stores/LoadingPinia";
 import { DashboardHeaderPinia } from "../../../stores/DashboardHeaderVisible";
 
 
+const Loading = LoadingPinia();
+Loading.isLoading = false;
+
+const Dashboard = DashboardHeaderPinia();
+Dashboard.isVisible = false;
+
+
 const Cores = ["policia","bombeiro","ambulancia"];
 const PosicoesCorrida = 7;
 // 0 => policia , 1 => bombeiro , 2 => ambulancia
@@ -140,53 +147,26 @@ console.log(DashboardArray);
 
     <!-- Game Container -->
     <div class="flex-1 w-full flex flex-col justify-center items-center">
-        <div v-if="ActualState == `Start`" class="h-[600px] w-full md:w-[70%] flex flex-col sm:justify-center items-center">
-            <div class="text-[26px] md:text-5xl font-[700] mb-12 sm:mb-0">Escolha um para apostar</div>
-            <!-- 640px above Menu -->
-            <div class="h-[90%] border-2 w-full hidden sm:flex flex-row justify-center items-center">
-                <!-- Policia Box -->
-                <div class="h-[60%] w-[300px] md:w-[25%] flex flex-col border-4 border-black rounded-3xl cursor-pointer" id="policia" @click="StartGame">
-                    <div class="flex items-center justify-center text-[23px] md:text-[2vw] font-bold h-[20%] w-full">Polícia</div>
-                    <div class="h-[80%] w-full">
-                        <img class="h-full w-full object-fill rounded-b-3xl" src="/CORRIDA/policia.png">
+        <div v-if="ActualState == `Start`" class="h-full w-full flex flex-col items-center">
+            <div class="text-[26px] md:text-[45px] font-[600] font-lexend">Escolha seu carro</div>
+            <!-- Carros Container -->
+            <div class="h-[100vh] sm:h-[400px] w-full flex flex-col sm:flex-row justify-center items-center">
+                <div id="policia" @click="StartGame" class="h-[300px] w-[300px] border-black border-2 cursor-pointer m-4">
+                    <span class="h-[50px] w-full flex justify-center items-center font-lexend font-[700]"> Policia </span>
+                    <div class="h-[250px] w-full flex justify-center items-center">
+                        <img src="/CORRIDA/policia.png">
                     </div>
                 </div>
-                <!-- Bombeiro Box -->
-                <div class="h-[60%] w-[300px] md:w-[25%] flex flex-col border-4 border-black rounded-3xl ml-4 md:ml-12 cursor-pointer" id="bombeiro" @click="StartGame">
-                    <div class="flex items-center justify-center text-[23px] md:text-[2vw] font-bold h-[20%] w-full">Bombeiro</div>
-                    <div class="h-[80%] w-full">
-                        <img class="h-full w-full object-fill rounded-b-3xl" src="/CORRIDA/bombeiro.png">
+                <div id="bombeiro" @click="StartGame" class="h-[300px] w-[300px] border-black border-2 cursor-pointer m-4">
+                    <span class="h-[50px] w-full flex justify-center items-center font-lexend font-[700]"> Bombeiro </span>
+                    <div class="h-[250px] w-full flex justify-center items-center">
+                        <img src="/CORRIDA/bombeiro.png">
                     </div>
                 </div>
-                <!-- Ambulancia Box -->
-                <div class="h-[60%] w-[300px] md:w-[25%] flex flex-col border-4 border-black rounded-3xl ml-4 md:ml-12 cursor-pointer" id="ambulancia" @click="StartGame">
-                    <div class="flex items-center justify-center text-[23px] md:text-[2vw] font-bold h-[20%] w-full">Ambulância</div>
-                    <div class="h-[80%] w-full">
-                        <img class="h-full w-full object-fill rounded-b-3xl" src="/CORRIDA/ambulancia.png">
-                    </div>
-                </div>
-            </div>
-            <!-- Mobile Menu below 640px -->
-            <div class="h-auto w-full flex sm:hidden flex-col justify-center items-center">
-                <!-- Policia Box Mobile -->
-                <div class="h-[400px] w-[80%] flex flex-col border-4 border-black rounded-3xl cursor-pointer" id="policia" @click="StartGame">
-                    <div class="h-[30%] w-full flex items-center justify-center text-[28px] font-bold">Polícia</div>
-                    <div class="h-[70%] w-full">
-                        <img class="h-full w-full object-fill rounded-b-3xl" src="/CORRIDA/policia.png">
-                    </div>
-                </div>
-                <!-- Bombeiro Box Mobile -->
-                <div class="h-[400px] w-[80%] flex flex-col border-4 border-black rounded-3xl cursor-pointer" id="bombeiro" @click="StartGame">
-                    <div class="h-[30%] w-full flex items-center justify-center text-[28px] font-bold">Bombeiro</div>
-                    <div class="h-[70%] w-full">
-                        <img class="h-full w-full object-fill rounded-b-3xl" src="/CORRIDA/bombeiro.png">
-                    </div>
-                </div>
-                <!-- Ambulancia Box Mobile -->
-                <div class="h-[400px] w-[80%] flex flex-col border-4 border-black rounded-3xl cursor-pointer" id="ambulancia" @click="StartGame">
-                    <div class="h-[30%] w-full flex items-center justify-center text-[28px] font-bold">Ambulância</div>
-                    <div class="h-[70%] w-full">
-                        <img class="h-full w-full object-fill rounded-b-3xl" src="/CORRIDA/ambulancia.png">
+                <div id="ambulancia" @click="StartGame" class="h-[300px] w-[300px] border-black border-2 cursor-pointer m-4">
+                    <span class="h-[50px] w-full flex justify-center items-center font-lexend font-[700]"> Ambulancia </span>
+                    <div class="h-[250px] w-full flex justify-center items-center">
+                        <img src="/CORRIDA/ambulancia.png">
                     </div>
                 </div>
             </div>

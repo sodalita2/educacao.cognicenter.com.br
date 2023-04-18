@@ -186,19 +186,23 @@ async function StartGame() {
             <div class="h-[100%] w-[80%] flex flex-col">
                 <!-- 1 half -->
                 <div class="h-[50%] w-full flex flex-row justify-center items-end">
-                    <span ref="red" id="red" @click="countBtn" class="h-[75%] w-[25%] rounded-tl-[100%] bg-[red] m-1 relative cursor-pointer saturate-[40%]">
+                    <span ref="red" id="red" @click="countBtn" class="h-[75%] w-[25%] rounded-tl-[100%] bg-[red] m-1 relative cursor-pointer saturate-[40%]
+                    focus:outline-none">
                         <div class="absolute right-[-6px] bottom-[-5px] h-[6%] w-[6%] rounded-tl-[100%] bg-black z-10"></div>
                     </span>
-                    <span ref="blue" id="blue" @click="countBtn" class="h-[75%] w-[25%] rounded-tr-[100%] bg-[blue] m-1 relative cursor-pointer saturate-[40%]">
+                    <span ref="blue" id="blue" @click="countBtn" class="h-[75%] w-[25%] rounded-tr-[100%] bg-[blue] m-1 relative cursor-pointer saturate-[40%]
+                    focus:outline-none">
                         <div class="absolute left-[-6px] bottom-[-5px] h-[6%] w-[6%] rounded-tr-[100%] bg-black z-10"></div>
                     </span>
                 </div>
                 <!-- 2 half -->
                 <div class="h-[50%] w-full flex flex-row justify-center items-start">
-                    <span ref="yellow" id="yellow" @click="countBtn" class="h-[75%] w-[25%] rounded-bl-[100%] bg-[yellow] m-1 relative cursor-pointer saturate-[40%]">
+                    <span ref="yellow" id="yellow" @click="countBtn" class="h-[75%] w-[25%] rounded-bl-[100%] bg-[yellow] m-1 relative cursor-pointer saturate-[40%]
+                    focus:outline-none">
                         <div class="absolute right-[-6px] top-[-5px] h-[6%] w-[6%] rounded-bl-[100%] bg-black z-10 cursor-pointer"></div>
                     </span>
-                    <span ref="green" id="green" @click="countBtn" class="h-[75%] w-[25%] rounded-br-[100%] bg-[green] m-1 relative cursor-pointer saturate-[40%]">
+                    <span ref="green" id="green" @click="countBtn" class="h-[75%] w-[25%] rounded-br-[100%] bg-[green] m-1 relative cursor-pointer saturate-[40%]
+                    focus:outline-none">
                         <div class="absolute left-[-6px] top-[-5px] h-[6%] w-[6%] rounded-br-[100%] bg-black z-10 cursor-pointer"></div>
                     </span>
                 </div>

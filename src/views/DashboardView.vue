@@ -80,12 +80,12 @@ function RightMenuToggle() {
                 <span @click="RightMenuToggle" class="ml-auto mr-6 h-auto w-auto font-[800] font-lexend text-[35px] text-[#4EEE90] cursor-pointer"> X </span>
             </div>
             <!-- Right Menu Nav -->
-            <div class="h-[300px] w-full flex flex-col items-center justify-center bg-[pink]">
-                <RouterLink to="/desempenho" class="mb-5 h-[46px] w-[200px] flex items-center justify-center bg-[#4EEE90] text-[whitesmoke] text-[25px] font-[600] font-lexend"> 
+            <div class="h-full w-full flex flex-col items-center bg-[rgba(255,192,203,0.5)]">
+                <RouterLink to="/desempenho" class="mt-8 h-[46px] w-[200px] flex items-center justify-center bg-[#4EEE90] text-[whitesmoke] text-[25px] font-[600] font-lexend"> 
                     Desempenho
                 </RouterLink>
-                <RouterLink to="/configuracoes" class="h-[46px] w-[200px] flex items-center justify-center bg-[#4EEE90] text-[whitesmoke] text-[25px] font-[600] font-lexend"> 
-                    Perfil
+                <RouterLink to="/configuracoes" class="mt-5 h-[46px] w-[200px] flex items-center justify-center bg-[#4EEE90] text-[whitesmoke] text-[25px] font-[600] font-lexend"> 
+                    Minha Conta
                 </RouterLink>
             </div>
         </div>
