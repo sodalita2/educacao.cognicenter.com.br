@@ -48,17 +48,18 @@ function cadastrarPerfil() {
 <template>
 
     <!-- Main Container -->
-    <div class="h-[100vh] w-full flex flex-col justify-center items-center">
-        <form class="flex flex-col w-[70%] h-[500px]">
-            <span class="pl-2 h-[50px] w-full flex items-center bg-[pink] text-[21px] font-lexend font-[500]"> Cadastrar Perfil </span>
-            <span class="pl-2 h-[50px] w-full flex items-end text-[17px] font-lexend font-[400]"> Primeiro Nome: </span>
-            <input ref="cadastroPrimeiroNome" type="text" class="h-[33px] w-[70%] flex ml-2">
-            <span class="pl-2 h-[35px] w-full flex items-end text-[17px] font-lexend font-[400]"> Sobrenome: </span>
-            <input ref="cadastroSobrenome" type="text" class="h-[33px] w-[70%] flex ml-2">
-            <span class="pl-2 h-[35px] w-full flex items-end text-[17px] font-lexend font-[400]"> Idade: </span>
-            <input ref="cadastroIdade" type="number" class="h-[33px] w-[45px] flex text-center ml-2 text-[20px] font-lexend font-[400]
+    <div class="min-h-[100vh] w-full flex flex-col justify-center items-center">
+        <form class="flex flex-col w-[70%] h-[65vh] border-[rgba(0,0,0,0.08)] border-[1px] bg-[rgba(255,67,101,0.24)]">
+            <span class="pl-2 h-[50px] w-full flex items-center bg-[#FF4365] text-[22px] text-[#FFFFFF] font-lexend font-[600]"> Cadastrar Perfil </span>
+            <span class="pl-6 h-[50px] w-full flex items-end text-[17px] font-lexend font-[400]"> Primeiro Nome: </span>
+            <input ref="cadastroPrimeiroNome" type="text" class="h-[33px] min-w-[250px] max-w-[500px] flex ml-6 text-[16px] font-[600] font-lexend pl-2">
+            <span class="pl-6 h-[35px] w-full flex items-end text-[17px] font-lexend font-[400]"> Sobrenome: </span>
+            <input ref="cadastroSobrenome" type="text" class="h-[33px] min-w-[250px] max-w-[500px] flex ml-6 text-[16px] font-[600] font-lexend pl-2">
+            <span class="pl-6 h-[35px] w-full flex items-end text-[17px] font-lexend font-[400]"> Idade: </span>
+            <input ref="cadastroIdade" type="number" class="h-[33px] w-[45px] flex text-center ml-6 text-[20px] font-lexend font-[400]
             [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
-            <div @click="cadastrarPerfil" class="w-[90px] h-[30px] flex items-center justify-center bg-[pink] cursor-pointer"> Criar </div>
+            <div @click="cadastrarPerfil" class="w-[160px] h-[50px] flex items-center justify-center ml-6 mt-10 bg-[#4EEE90] text-[#FFFFFF]
+            text-[24px] font-[700] font-lexend tracking-tight cursor-pointer"> Criar </div>
         </form>
     </div>
 
